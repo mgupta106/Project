@@ -70,17 +70,34 @@ DRC <- merge(DRC, popg, by = "Year", all = TRUE)
 #remove unnecessary dataframes
 remove(popg, upa, tpop, rec, ate, forestkm, agkm, agp)
 
-DRC<- lapply(DRC, as.numeric)
 
 #Plotting total pop. growth
 
-plot(DRC$tpop, DRC$Year, pch = 0.5, na.rm = FALSE)
+#remove unnecessary dataframes
+remove(popg, upa, tpop, rec, ate, forestkm, agkm, agp)
+
+popg<- lapply(DRC$popg, as.numeric)
+
+
+DRC <- as.data.frame(DRC)
+#Plotting total pop. growth
+
+DRC$Year <- as.numeric(as.character(DRC$Year))
+DRC$popg <- as.numeric(as.character(DRC$popg))
+DRC$
+
+
+plot(DRC$Year, DRC$popg, pch = 0.5, na.rm = FALSE, main = "Population Growth 1960 to 2020")
 
 
 
 colnames(DRC) <- make.unique(names(DRC)) #if getting duplicate 'data' error
+DRC <- as.data.frame(lapply(DRC, na.omit)) #trying to remove NA values
+
 
 g <- ggplot(data = DRC)+
-  geom_point(mapping = aes(Year, popg), na.rm = TRUE) +
-  scale_y_continuous(limits = c("0.5", "3.5", "0.5"))
+  geom_point(mapping = aes(Year, popg), na.rm = TRUE,)
 g
+
+
+
