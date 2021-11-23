@@ -6,6 +6,7 @@ library(ggplot2)
 library(plotly)
 library(tidyverse)
 
+
 climate_change_cod <- read_csv("climate_change_cod.csv")
 
 View(climate_change_cod)
@@ -77,7 +78,21 @@ plot(DRC$Year, DRC$urbpop, pch=0.75, col = "Red", na.rm = FALSE, main= "Urban Po
 ## the graph, there is an exponential increase in the urban population as the years go on. The graph
 ## has an exponential growth. 
 
+## Remove Duplicate Values
+colnames(DRC) <- make.unique(names(DRC))
 
+
+## 2D Histogram Showing Relationship between Year and Urban Population
+ggplot(DRC, aes(x=Year, y=urbpop)) +
+  geom_bin2d() +
+  theme_bw() +
+  labs(title="Urban Population Growth between Years of 1960 and 2020")
+
+ggplot(DRC, aes(x=Year, y=urbpop) ) +
+  geom_bin2d(bins = 70) +
+  scale_fill_continuous(type = "viridis") +
+  theme_bw() +
+  labs(title="Urban Population Growth between Years of 1960 and 2020")
 
 
 
