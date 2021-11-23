@@ -64,12 +64,14 @@ DRC <- as.data.frame(DRC)
 
 agrland<- lapply(DRC$agrland, as.numeric)
 
-## Plotting Urban Population by Year
+## Plotting Urban Population by Year Using Plot Function
 
 DRC$Year <- as.numeric(as.character(DRC$Year))
-DRC$agrland <- as.numeric(as.character(DRC$agrland))
+DRC$urbpop <- as.numeric(as.character(DRC$urbpop))
 
-plot(DRC$Year, DRC$urbpop, pch=0.75, na.rm = FALSE, main= "Urban Population from 1960 to 2020")
+plot(DRC$Year, DRC$urbpop, pch=0.75, col = "Red", na.rm = FALSE, main= "Urban Population from 1960 to 2020")
+
+
 
 
 
