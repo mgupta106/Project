@@ -6,11 +6,9 @@ library(ggplot2)
 library(plotly)
 library(tidyverse)
 
-
 climate_change_cod <- read_csv("climate_change_cod.csv")
 
 View(climate_change_cod)
-
 
 ## Renaming Variables
 
@@ -94,7 +92,13 @@ ggplot(DRC, aes(x=Year, y=urbpop) ) +
   theme_bw() +
   labs(title="Urban Population Growth between Years of 1960 and 2020")
 
+## Explanation
 
+## I am visualizing the relationship between Year and Urban Population using a 2D histogram. This is 
+## another way to visualize the data besides using the plot function. I labelled the x-axis to show 
+## the year and y-axis urbpop.By looking at the visualization, I can see there is an exponential 
+## growth between Year and Urban Population. This graph explains that as the years go by, the urban 
+## population also increases.
 
 
 
