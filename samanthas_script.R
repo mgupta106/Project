@@ -98,13 +98,11 @@ DRC$rec <- as.numeric(as.character(DRC$rec))
 DRC$ag.lnd.per <- as.numeric(as.character(DRC$ag.lnd.per))
 
 
-
-
 g <- ggplot(data = DRC)+
   geom_point(mapping = aes(Year, ate, color = "Access to Electricity"), na.rm = TRUE,) + 
   geom_point(mapping = aes(Year, popg, color = "Population Growth"), na.rm = TRUE) +
   geom_point(mapping = aes(Year, upa, color = "Urban Agglomeration Populations"), na.rm = TRUE) +
-  geom_point(mapping = aes(Year, ag.land.per, color = "Agricultural Land"), na.rm = TRUE)+
+  geom_point(mapping = aes(Year, ag.lnd.per, color = "Agricultural Land"), na.rm = TRUE)+
   scale_color_discrete(name = "Statistic by Percentage") +
   theme_minimal() +
   xlab("Year") +
