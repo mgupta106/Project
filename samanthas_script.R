@@ -101,23 +101,21 @@ DRC$ag.lnd.per <- as.numeric(as.character(DRC$ag.lnd.per))
 
 
 g <- ggplot(data = DRC)+
-  geom_point(mapping = aes(Year, ate, color = "Access to Electricity"), na.rm = TRUE,) + 
-  geom_point(mapping = aes(Year, popg, color = "Population Growth"), na.rm = TRUE) +
-  geom_point(mapping = aes(Year, upa, color = "Urban Agglomeration Populations"), na.rm = TRUE) +
-  geom_point(mapping = aes(Year, ag.land.per, color = "Agricultural Land"), na.rm = TRUE)+
+  geom_area(mapping = aes(Year, ate, fill = "Access to Electricity"), alpha = 0.5, na.rm = TRUE,) + 
+  geom_area(mapping = aes(Year, popg, fill = "Population Growth"), alpha = 0.5, na.rm = TRUE) +
+  geom_area(mapping = aes(Year, upa, fill = "Urban Agglomeration Populations"), alpha = 0.5, na.rm = TRUE) +
+  geom_area(mapping = aes(Year, ag.lnd.per, fill = "Agricultural Land"), alpha = 0.5, na.rm = TRUE)+
   scale_color_discrete(name = "Statistic by Percentage") +
-  theme_minimal() +
-  xlab("Year") +
-  ylab("Percent")
+  stat_smooth(
+    geom = 'area', method = 'loess', span = 1/3,
+    alpha = 1/2, fill = "red") + 
+  labs(title = "Smooth with `span = 1/3`")
 
 g
 
 #------------
 
-data <- data.frame(DRC$rec, SF_Zoo, LA_Zoo)
-
-fig <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo')
-fig <- fig %>% add_trace(y = ~LA_Zoo, name = 'LA Zoo')
-fig <- fig %>% layout(yaxis = list(title = 'Count'), barmode = 'group')
-
-fig
+install.packages("corrgram")
+library(corrgram)
+corrgram(DRC, order=NULL, panel=panel.shade, text.panel=panel.txt,
+         main="Correlogram") 
