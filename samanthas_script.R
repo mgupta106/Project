@@ -84,7 +84,6 @@ DRC <- as.data.frame(DRC)
 
 DRC$Year <- as.numeric(as.character(DRC$Year))
 DRC$popg <- as.numeric(as.character(DRC$popg))
-DRC$
 
 
 plot(DRC$Year, DRC$popg, pch = 0.5, na.rm = FALSE, main = "Population Growth 1960 to 2020")
@@ -93,11 +92,30 @@ plot(DRC$Year, DRC$popg, pch = 0.5, na.rm = FALSE, main = "Population Growth 196
 
 colnames(DRC) <- make.unique(names(DRC)) #if getting duplicate 'data' error
 DRC <- as.data.frame(lapply(DRC, na.omit)) #trying to remove NA values
+DRC$upa <- as.numeric(as.character(DRC$upa))
+DRC$ate <- as.numeric(as.character(DRC$ate))
+
 
 
 g <- ggplot(data = DRC)+
-  geom_point(mapping = aes(Year, popg), na.rm = TRUE,)
+  geom_point(mapping = aes(Year, ate, color = "Access to Electricity"), na.rm = TRUE,) + 
+  geom_point(mapping = aes(Year, popg, color = "Population Growth"), na.rm = TRUE) +
+  geom_point(mapping = aes(Year, upa, color = "Urban Agglomeration Populations"), na.rm = TRUE) +
+  
 g
 
 
 
+
+#------------
+
+Animals <- c("giraffes", "orangutans", "monkeys")
+SF_Zoo <- c(20, 14, 23)
+LA_Zoo <- c(12, 18, 29)
+data <- data.frame(Animals, SF_Zoo, LA_Zoo)
+
+fig <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo')
+fig <- fig %>% add_trace(y = ~LA_Zoo, name = 'LA Zoo')
+fig <- fig %>% layout(yaxis = list(title = 'Count'), barmode = 'group')
+
+fig
