@@ -71,6 +71,12 @@ DRC$urbpop <- as.numeric(as.character(DRC$urbpop))
 
 plot(DRC$Year, DRC$urbpop, pch=0.75, col = "Red", na.rm = FALSE, main= "Urban Population from 1960 to 2020")
 
+## Explanation
+
+## In the above plot, I am showing the relationship between the Year and urban population. Based on 
+## the graph, there is an exponential increase in the urban population as the years go on. The graph
+## has an exponential growth. 
+
 
 
 
