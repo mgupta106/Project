@@ -36,37 +36,45 @@ urban_population <- subset(cod_dataset, Indicator.Code == "SP.URB.TOTL")
 ## Slicing Variables
 
 CO2emissionsgaseouskt <- slice(cod_dataset, 459:515)
-CO2emissionsgaseouskt <- rename(CO2emissionsgaseouskt, CO2 = "Value")
+CO2emissionsgaseouskt <- rename(CO2emissionsgaseouskt, CO2emissionsgaseouskt = "Value")
 
 populationgrowth <- slice(cod_dataset, 1582:1641)
-populationgrowth <- rename(populationgrowth, popgrow = "Value")
+populationgrowth <- rename(populationgrowth, populationgrowth = "Value")
 DRC<-merge(CO2emissionsgaseouskt, populationgrowth, by = "Year", all = TRUE)
 
 avgprec <- slice(cod_dataset, 249:260)
-avgprec <- rename(avgprec, avg.precipitation.mm = "Value")
+avgprec <- rename(avgprec, avgprec= "Value")
 DRC <- merge(DRC, avgprec, by = "Year", all = TRUE)
 
 totalgreenhousekt <- slice(cod_dataset, 1105:1153)
-totalgreenhousekt <- rename(totalgreenhousekt, total.emissions.C02.kt = "Value")
+totalgreenhousekt <- rename(totalgreenhousekt, totalgreenhousekt = "Value")
 DRC <- merge(DRC, totalgreenhousekt, by = "Year", all = TRUE)
 
 agrland <- slice(cod_dataset, 2:59)
-agrland <- rename(agrland, agr_land = "Value")
+agrland <- rename(agrland, agrland = "Value")
 DRC <- merge(DRC, agrland, by = "Year", all = TRUE)
 
 urbpop <- slice(cod_dataset, 1763:1823)
-urbpop <- rename(urbpop, urb.pop.total = "Value")
+urbpop <- rename(urbpop, urbpop = "Value")
 DRC <- merge(DRC, urbpop, by = "Year", all = TRUE)
 
 ## Two Visualizations
 
-## Plotting agricultural land by Year
+DRC <- as.data.frame(DRC)
 
-ggplot(agrland, aes(x=agr_land, y=Year)) +
-  geom_point() +
-  scale_x_discrete(limits=c(250500, 315000), breaks=c(250500, 275500, 300500, 325500)) +
-  scale_y_discrete(limits=c(1961, 2020), breaks=c(1961, 1981, 2001, 2021)) +
-  labs(title = "Agricultural Land")
+agrland<- lapply(DRC$agrland, as.numeric)
+
+## Plotting Urban Population by Year
+
+DRC$Year <- as.numeric(as.character(DRC$Year))
+DRC$agrland <- as.numeric(as.character(DRC$agrland))
+
+plot(DRC$Year, DRC$urbpop, pch=0.75, na.rm = FALSE, main= "Urban Population from 1960 to 2020")
+
+
+
+
+
 
 
 
