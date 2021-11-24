@@ -46,7 +46,9 @@ g
 ############
 #Correlogram between Year, Ag. Arable, precipitation, 
 
-DRC$popg <- as.numeric(as.character(DRC$popg))
+#First creating new DF with variables I want
+
+correl.df <- c(DRC$arbland, DRC$forestkm, DRC$agrland, DRC$avgprec, )
 
 
 library(corrgram)
