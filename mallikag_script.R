@@ -5,6 +5,8 @@ library(readr)
 library(ggplot2)
 library(plotly)
 library(tidyverse)
+library(gapminder)
+library(ggridges)
 
 climate_change_cod <- read_csv("climate_change_cod.csv")
 
@@ -47,6 +49,7 @@ DRC <- merge(DRC, avgprec, by = "Year", all = TRUE)
 
 totalgreenhousekt <- slice(cod_dataset, 1105:1153)
 totalgreenhousekt <- rename(totalgreenhousekt, totalgreenhousekt = "Value")
+
 DRC <- merge(DRC, totalgreenhousekt, by = "Year", all = TRUE)
 
 agrland <- slice(cod_dataset, 2:59)
@@ -58,17 +61,27 @@ urbpop <- rename(urbpop, urbpop = "Value")
 DRC <- merge(DRC, urbpop, by = "Year", all = TRUE)
 
 ## Two Visualizations
-
 DRC <- as.data.frame(DRC)
 
 agrland<- lapply(DRC$agrland, as.numeric)
+urbpop<- lapply(DRC$urbpop, as.numeric)
+avgprec <- lapply(DRC$avgprec, as.numeric)
+CO2emissionsgaseouskt <- lapply(DRC$CO2emissionsgaseouskt, as.numeric)
 
 ## Plotting Urban Population by Year Using Plot Function
 
 DRC$Year <- as.numeric(as.character(DRC$Year))
 DRC$urbpop <- as.numeric(as.character(DRC$urbpop))
 
-plot(DRC$Year, DRC$urbpop, pch=0.75, col = "Red", na.rm = FALSE, main= "Urban Population from 1960 to 2020")
+DRC$avgprec <- as.numeric(as.character(DRC$avgprec))
+
+
+
+plot(DRC$Year, DRC$urbpop, 
+     pch=0.75, 
+     col = "Red", 
+     na.rm = FALSE, 
+     main= "Urban Population from 1960 to 2020")
 
 ## Explanation
 
@@ -100,16 +113,14 @@ ggplot(DRC, aes(x=Year, y=urbpop) ) +
 ## growth between Year and Urban Population. This graph explains that as the years go by, the urban 
 ## population also increases.
 
-
-
-
-
-
-
-
-
-
- 
+## Ridgeline Plot
+ggplot(DRC, aes(x = Year, y = agrland, fill = avgprec)) +
+  geom_density_ridges(alpha=0.6, stat="binline", bins=20) +
+  theme_ridges() + 
+  theme(legend.position = "none") +
+  labs(title="Agricultural Land and Year") +
+  xlab("Year") +
+  ylab("Agricultural Land")
 
 
 
