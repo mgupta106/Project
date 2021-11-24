@@ -40,11 +40,16 @@ g
 
 #First creating new DF with variables I want
 
-correl.df <- c(DRC$arbland, DRC$forestkm, DRC$agrland, DRC$avgprec, )
+correl.df <- c(DRC$arbland, DRC$forestkm, DRC$agrland, DRC$avgprec, DRC$Year )
+#making them all numeric not chr.
+
+DRC$arbland <- as.numeric(as.character(DRC$arbland))
+DRC$agrland <- as.numeric(as.character(DRC$agrland))
+DRC$avgprec <- as.numeric(as.character(DRC$avgprec))
 
 
 library(corrgram)
-corrgram(DRC, order=NULL, panel=panel.shade, text.panel=panel.txt,
-         main="Correlogram") 
+corrgram(correl.df, order=NULL, panel=panel.shade, text.panel=panel.txt,
+         main="") 
 
 
