@@ -12,6 +12,7 @@ climate_change_cod <- read_csv("climate_change_cod.csv")
 
 View(climate_change_cod)
 
+<<<<<<< HEAD
 ## Renaming Variables
 
 cod_dataset <- rename(climate_change_cod, Indicator.Code = "Indicator Code", Country.Name = "Country Name", Country.Iso3 = "Country ISO3",Indicator.Name = "Indicator Name")
@@ -59,6 +60,8 @@ DRC <- merge(DRC, agrland, by = "Year", all = TRUE)
 urbpop <- slice(cod_dataset, 1763:1823)
 urbpop <- rename(urbpop, urbpop = "Value")
 DRC <- merge(DRC, urbpop, by = "Year", all = TRUE)
+=======
+>>>>>>> 2104a81e68ac76eed4831dcf0d048ea29ba2a2b4
 
 ## Two Visualizations
 DRC <- as.data.frame(DRC)
