@@ -1,11 +1,3 @@
-library(dplyr)
-library(base)
-library(tidyverse)
-library(gt)
-library(scales)
-library(corrgram)
-
-
 #Plotting total pop. growth
 DRC$Year <- as.numeric(as.character(DRC$Year))
 DRC$popg <- as.numeric(as.character(DRC$popg))
@@ -56,4 +48,3 @@ corrgram(DRC, order=NULL, panel=panel.shade, text.panel=panel.txt,
          main="Correlogram") 
 
 
-#

@@ -5,6 +5,9 @@
 library(dplyr)
 library(base)
 library(ggplot2)
+library(corrgram)
+library(scales)
+library(tidyverse)
 ccc <- read.csv("climate-change_cod.csv")
 cod_dataset <- ccc
 cod_dataset <- select(cod_dataset, Year, Value)
@@ -80,3 +83,7 @@ remove(C02emissionsgaseouskt, populationgrowth, avgprec, totalgreenhousekt, agrl
        popg, upa, tpop, rec, ate, forestkm, agkm, agp, arbland)
 #making DRC dataframe
 DRC <- as.data.frame(DRC)
+
+
+
+                                                      
