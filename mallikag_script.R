@@ -122,8 +122,6 @@ ggplot(DRC, aes(x = Year, y = agrland, fill = avgprec)) +
   xlab("Year") +
   ylab("Agricultural Land")
 
-## Explaning
-
 
 
 
